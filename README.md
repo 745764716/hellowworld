@@ -1,2 +1,0 @@
-# hellowworld
-comp3710

@@ -87,17 +87,3 @@ Run `./demo_imagenet.sh`.
 Run `./demo_cifar.sh`.
 
 
-## Citation
-
-
-If you use our codebase, please cite our work:
-
-```
-@article{sun2022knnood,
-  title={Out-of-distribution Detection with Deep Nearest Neighbors},
-  author={Sun, Yiyou and Ming, Yifei and Zhu, Xiaojin and Li, Yixuan},
-  journal={ICML},
-  year={2022}
-}
-```
-

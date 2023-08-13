@@ -78,18 +78,22 @@ It is tested under Ubuntu Linux 20.04 and Python 3.8 environment, and requries s
 ## Demo
 ### 1. Demo code for Cifar-10 Experiment 
 Run python feat_extract.py --in-dataset CIFAR-10  --out-datasets SVHN LSUN LSUN_resize iSUN dtd places365_sub --name densenet  --model-arch densenet --epochs 1002
+
 Run python run_cifar_densenet.py --in-dataset CIFAR-10  --out-datasets SVHN LSUN LSUN_resize iSUN dtd places365_sub --name densenet  --model-arch densenet
 
 ### 2. Demo code for Cifar-100 Experiment 
 Run python feat_extract.py --in-dataset CIFAR-100  --out-datasets SVHN LSUN LSUN_resize iSUN dtd places365_sub --name densenet  --model-arch densenet --epochs 1002
+
 Run python run_cifar_densenet_c100.py --in-dataset CIFAR-100  --out-datasets SVHN LSUN LSUN_resize iSUN dtd places365_sub --name densenet  --model-arch densenet
 
 ### 3. Demo code for ImageNet Experiment on ResNet50
 Run python feat_extract_largescale.py --in-dataset imagenet  --out-datasets inat sun50 places50 dtd  --name resnet50  --model-arch resnet50
+
 Run python run_imagenet.py --in-dataset imagenet  --out-datasets inat sun50 places50 dtd  --name resnet50  --model-arch resnet50
 
 ### 4. Demo code for Cifar-100 Experiment on MobileNetv2
 Run python feat_extract_largescale.py --in-dataset imagenet  --out-datasets inat sun50 places50 dtd  --name mobilenetv2  --model-arch mobilenetv2
+
 Run python run_imagenet_mobilenet.py --in-dataset imagenet  --out-datasets inat sun50 places50 dtd  --name mobilenetv2  --model-arch mobilenetv2
 
 

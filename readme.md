@@ -5,8 +5,22 @@
 
 #### In-distribution dataset
 
-Please download [ImageNet-1k](http://www.image-net.org/challenges/LSVRC/2012/index) and place the training data and validation data in
-`./datasets/imagenet/train` and  `./datasets/imagenet/val`, respectively.
+##### ResNet50:
+1. go to the imagenet_feature_resnet_50 folder to extract the pre-trained features of Imagetnet via running
+python feature_extraction.py
+For convenience, the extracted features has been given in the imagenet_feature_resnet_50 folder.
+2. under the same folder, sort and combine the pretrained features via running
+python feature_sort_resnet_50.py
+For convenience, the sorted features has been given in the knn-ood-master/cache/imagenet_feature_resnet_50_sorted folder
+
+##### MobileNetv2:
+1. go to the imagenet_feature_mobilenet_v2 folder to extract the pre-trained features of Imagetnet via running
+python feature_extraction.py
+For convenience, the extracted features has been given in the imagenet_feature_mobilenet_v2 folder.
+2. under the same folder, sort and combine the pretrained features via running
+python feature_sort_mobilenet_v2.py
+For convenience, the sorted features has been given in the knn-ood-master/cache/imagenet_feature_mobilenet_v2_sorted folder
+
 
 #### Out-of-distribution dataset
 
@@ -47,8 +61,7 @@ We provide links and instructions to download each dataset:
 * [LSUN](https://www.dropbox.com/s/fhtsw1m3qxlwj6h/LSUN.tar.gz): download it and place it in the folder of `datasets/ood_data/LSUN`.
 * [iSUN](https://www.dropbox.com/s/ssz7qxfqae0cca5/iSUN.tar.gz): download it and place it in the folder of `datasets/ood_data/iSUN`.
 * [LSUN_fix](https://drive.google.com/file/d/1KVWj9xpHfVwGcErH5huVujk9snhEGOxE/view?usp=sharing): download it and place it in the folder of `datasets/ood_data/LSUN_fix`.
-* [ImageNet_fix](https://drive.google.com/file/d/1sO_-noq10mmziB1ECDyNhD5T4u5otyKA/view?usp=sharing): download it and place it in the folder of `datasets/ood_data/ImageNet_fix`.
-* [ImageNet_resize](https://www.dropbox.com/s/kp3my3412u5k9rl/Imagenet_resize.tar.gz): download it and place it in the folder of `datasets/ood_data/Imagenet_resize`.
+
 
 [//]: # (For example, run the following commands in the **root** directory to download **LSUN**:)
 
@@ -65,11 +78,11 @@ We provide links and instructions to download each dataset:
 
 ### 3.  Pre-trained model
 
-Please download [Pre-trained models](https://drive.google.com/file/d/1PJ5SXx0MLvq8kSZ4dmdAJaR77BHz5Y-6/view?usp=sharing) and place in the `./checkpoints` folder.
+Pre-trained models are placed in the knn-ood-master/checkpoints folder.
 
 ## Preliminaries
-It is tested under Ubuntu Linux 20.04 and Python 3.8 environment, and requries some packages to be installed:
-* [PyTorch](https://pytorch.org/)
+It is tested Python 3.4 environment, and requries some packages to be installed:
+* [PyTorch 1.2.0](https://pytorch.org/)
 * [scipy](https://github.com/scipy/scipy)
 * [numpy](http://www.numpy.org/)
 * [sklearn](https://scikit-learn.org/stable/)

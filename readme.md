@@ -6,21 +6,16 @@
 #### In-distribution dataset
 
 ##### ResNet50:
-1. go to the imagenet_feature_resnet_50 folder to extract the pre-trained features of Imagetnet via running
-python feature_extraction.py
-For convenience, the extracted features has been given in the imagenet_feature_resnet_50 folder.
-2. under the same folder, sort and combine the pretrained features via running
-python feature_sort_resnet_50.py
-For convenience, the sorted features has been given in the knn-ood-master/cache/imagenet_feature_resnet_50_sorted folder
+Run python imagenet_resnet/feature_extraction.py
+Run python imagenet_resnet/feature_sort_resnet_50.py
+Place the sorted features in the folder of cache/imagenet_feature_resnet_50_sorted
 
 ##### MobileNetv2:
-1. go to the imagenet_feature_mobilenet_v2 folder to extract the pre-trained features of Imagetnet via running
-python feature_extraction.py
-For convenience, the extracted features has been given in the imagenet_feature_mobilenet_v2 folder.
-2. under the same folder, sort and combine the pretrained features via running
-python feature_sort_mobilenet_v2.py
-For convenience, the sorted features has been given in the knn-ood-master/cache/imagenet_feature_mobilenet_v2_sorted folder
+Run python imagenet_mobilenet/feature_extraction.py
+Run python imagenet_mobilenet/feature_sort_mobilenet_v2.py
+Place the sorted features in the folder of cache/imagenet_feature_mobilenet_v2_sorted
 
+For convenience, the ImageNet Features can be download from https://1drv.ms/f/s!AtOtfUBMB8Oemu4ceTd_TpKwcJZUDg?e=6PW8wS.
 
 #### Out-of-distribution dataset
 

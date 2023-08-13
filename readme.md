@@ -73,8 +73,6 @@ It is tested under Ubuntu Linux 20.04 and Python 3.8 environment, and requries s
 * [scipy](https://github.com/scipy/scipy)
 * [numpy](http://www.numpy.org/)
 * [sklearn](https://scikit-learn.org/stable/)
-* [faiss](https://github.com/facebookresearch/faiss)
-* [pytorch-vit](https://github.com/lukemelas/PyTorch-Pretrained-ViT)
 * [ylib](https://github.com/sunyiyou/ylib) (Manually download and copy to the current folder)
 
 ## Demo

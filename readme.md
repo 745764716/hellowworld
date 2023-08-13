@@ -7,15 +7,19 @@
 
 ##### ResNet50:
 Run python imagenet_resnet/feature_extraction.py
+
 Run python imagenet_resnet/feature_sort_resnet_50.py
+
 Place the sorted features in the folder of cache/imagenet_feature_resnet_50_sorted
 
 ##### MobileNetv2:
 Run python imagenet_mobilenet/feature_extraction.py
+
 Run python imagenet_mobilenet/feature_sort_mobilenet_v2.py
+
 Place the sorted features in the folder of cache/imagenet_feature_mobilenet_v2_sorted
 
-For convenience, the ImageNet Features can be download from https://1drv.ms/f/s!AtOtfUBMB8Oemu4ceTd_TpKwcJZUDg?e=6PW8wS.
+For convenience, the ImageNet Features can be downloaded from https://1drv.ms/f/s!AtOtfUBMB8Oemu4ceTd_TpKwcJZUDg?e=6PW8wS.
 
 #### Out-of-distribution dataset
 

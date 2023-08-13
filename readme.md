@@ -1,7 +1,7 @@
 
 ## Usage
 
-### 1. Dataset Preparation for Large-scale Experiment 
+### 1. Dataset Preparation for ImageNet Experiment 
 
 #### In-distribution dataset
 

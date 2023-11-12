@@ -34,7 +34,7 @@ We thank the reviewer for the valuable and constructive comments and we have upd
 
 Q1: The main search problem of optimal coefficient for OOD scoring is remained as a hyperparameter search, which may constrain the practicality of the proposed score and How to choose $p$.
 
-A1.1: Thank you for your advice. At first, we believe that it is reasonable and necessary to find the optimal norm coefficient $p$ since the feature distribution of different datasets produced by different network architectures tends to differ from each other. We also find that SOTA post-hoc OOD detection methods [a,b,c,d,e,f] come with (one or more) hyper-parameter searching as well, where their searched hyper-parameters vary across datasets. 
+A1.1: Thank you for your advice. We believe that it is necessary to find the optimal norm coefficient $p$ since the feature distribution of different datasets produced by different network architectures is not necessarily same as each other. Therefore, it is not reasonable to use a universal norm coefficient for all datasets. We also find that SOTA post-hoc OOD detection methods [a,b,c,d,e,f] come with (one or more) hyper-parameter searching as well, where their searched hyper-parameters vary across datasets. 
 
 A1.2: We use a subset of Tiny imagenet as the auxiliary OOD data. We remove those data whose labels coincide with ID and test-time OOD cases. The optimal p is selected from 1 and 3. We will add this details in the appendix. Please refer to Section A.3 in the revision for details.
 

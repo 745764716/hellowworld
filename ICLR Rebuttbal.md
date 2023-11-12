@@ -34,7 +34,9 @@ We thank the reviewer for the valuable and constructive comments and we have upd
 
 Q1: The main search problem of optimal coefficient for OOD scoring is remained as a hyperparameter search, which may constrain the practicality of the proposed score and How to choose $p$.
 
-A1: Thank your for your advice. At first, we believe that it is reasonable and necessary to search optimal norm coefficient $p$ since the feature distribution of different datasets produced by different network acchitecture tends to differ from each other. We also find that sota post-hoc OOD detection methods [a,b,c,d,e,f] come with seaching one (or more) hyparameters, and their seached hyparameters varies across datasets. 
+A1.1: Thank you for your advice. At first, we believe that it is reasonable and necessary to find the optimal norm coefficient $p$ since the feature distribution of different datasets produced by different network architectures tends to differ from each other. We also find that SOTA post-hoc OOD detection methods [a,b,c,d,e,f] come with (one or more) hyper-parameter searching as well, where their searched hyper-parameters vary across datasets. 
+
+A1.2: We use a subset of Tiny imagenet as the auxiliary OOD data. We remove those data whose labels coincide with ID and test-time OOD cases. The optimal p is selected from 1 and 3. We will add this details in the appendix. Please refer to Section A.3 in the revision for details.
 
 [a] Extremely simple activation shaping for out-of-distribution detection. ICLR 2023
 
@@ -48,10 +50,10 @@ A1: Thank your for your advice. At first, we believe that it is reasonable and n
 
 Q2: For long-tailed OOD detection when the ID training data exhibits an imbalanced class distribution, I guess the accuracy of the importance sampling-based estimation may decrease given a limited number of tail-class predictions. Elaborate why their method still outperforms in the long-tailed scenarios.
 
-A2:  Thanks for your advice. We agree with your insightful intuition. The table below shows that, compared with (II) estimation based on the full CIFAR-100 training dataset, estimation based on the long-tailed version of the CIFAR-100 training dataset (I) will result in worse OOD detection performance. However, this does not prevent our method from outperforming in this scenario, which implies the robustness and flexibility of the importance sampling-based estimation in our method. We have revised the submission accordingly by adding more discussions on the experiment results of Table 4. Please refer to Section 4.4.2 in the revision for details.
+A2:  Thanks for your advice. We agree with your insightful intuition. The table below shows that, compared with (II) estimation based on the full CIFAR-100 training dataset, estimation based on the long-tailed version of the CIFAR-100 training dataset (I) will result in worse OOD detection performance. However, this does not prevent our method from outperforming in this scenario, which implies the robustness and flexibility of the importance sampling-based estimation in our method. We have revised the submission accordingly by adding a discussion on the experiment results of Table 4. Please refer to Section 4.4.2 in the revision for details.
 
 |      Baseline  |      SVHN    |              |      LSUN    |              |      iSUN    |              |     Textures    |              |     Places       |              |     Average    |              |
 |:--------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:---------------:|:------------:|:----------------:|:------------:|:--------------:|:------------:|
 |                |     FPR95    |     AUROC    |     FPR95    |     AUROC    |     FPR95    |     AUROC    |       FPR95     |     AUROC    |       FPR95      |     AUROC    |      FPR95     |     AUROC    |
 |       (I)      |     40.16    |     91.00    |     45.72    |     87.64    |     41.89    |     90.42    |       40.50     |     86.80    |       91.74      |     58.44    |      52.00     |     82.86    |
-|       (II)      |     35.66    |     91.51    |     42.40    |     89.81    |     40.41    |     90.59    |       34.54     |     88.90    |       89.28      |     62.84    |      48.46     |     84.73    |
+|       (II)     |     35.66    |     91.51    |     42.40    |     89.81    |     40.41    |     90.59    |       34.54     |     88.90    |       89.28      |     62.84    |      48.46     |     84.73    |

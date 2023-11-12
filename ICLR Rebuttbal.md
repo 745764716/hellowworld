@@ -34,7 +34,12 @@ We thank the reviewer for the valuable and constructive comments and we have upd
 
 Q1: The main search problem of optimal coefficient for OOD scoring is remained as a hyperparameter search, which may constrain the practicality of the proposed score and How to choose $p$.
 
-A1: Thank your for your advice. At first, we believe that it is reasonable and necessaru to search optimal norm coefficient $p$ since the feature distribution of different datasets produced by different network acchitecture does not necessarily same. We also find that a marjotiy of post-hoc OOD detection methods [a,b,] come with seaching one (or more) hyparameters, their seached hyparameters varies across datasets. 
+A1: Thank your for your advice. At first, we believe that it is reasonable and necessaru to search optimal norm coefficient $p$ since the feature distribution of different datasets produced by different network acchitecture tends to differ from each other. We also find that sota post-hoc OOD detection methods [a,b,c,d,e,f,g,h,i] come with seaching one (or more) hyparameters, their seached hyparameters varies across datasets. 
+
+[a] Extremely simple activation shaping for out-of-distribution detection. ICLR 2023
+[b] LINe: Out-of-Distribution Detection by Leveraging Important Neurons. CVPR 2023
+[c] Out-of-distribution detection with deep nearest neighbors. ICML 2022.
+[d] Dice: Leveraging sparsification for out-of-distribution detection. ECCV 2022
 
 Q2: For long-tailed OOD detection when the ID training data exhibits an imbalanced class distribution, I guess the accuracy of the importance sampling-based estimation may decrease given a limited number of tail-class predictions. Elaborate why their method still outperforms in the long-tailed scenarios.
 

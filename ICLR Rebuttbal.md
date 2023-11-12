@@ -8,7 +8,7 @@ Q1: Clarify “Without loss of generality, we employ latent features z extracted
 
 A1: 
 
-Q2: Discuss the role of DGMs for flexible density estimation in OOD detection
+Q2: Discuss the role of Deep generative models for flexible density estimation in OOD detection
 
 A2:
 

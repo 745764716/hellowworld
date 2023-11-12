@@ -1,12 +1,35 @@
+Dear Area Chairs and Reviewers,
+
+We would like to thank the reviewers again for their constructive and insightful comments, which help us a lot in improving the submission. We have uploaded the revised version and responded to all the reviewers in detail. We believe that the quality of the paper is improved and the contributions are solid. In particular, we would like to highlight some key materials we added:
+
+1.
+2.
+3.
+4.
+5.
+6.
+7. 
+
+We understand that reviewers are busy during the response period, we would greatly appreciate it if the reviewers can kindly advise if our responses solve their concerns. If there are any other suggestions/questions, we will try our best to provide satisfactory answers. We are looking forward to any further discussion with the reviewers. Thank you for your time.
+
+Best regards,
+
+The authors
+
+
+
+
 #### Reviewer EBSh
-Q1: I think this is an explicit assumption on the prior distribution, which contradicts to $\spadesuit$ how can we obtain a tractable estimate for $\Phi (k)$ without presuming any particular prior distribution of $\hat{p}_{\boldsymbol{\theta}}\left(\mathbf{z}|k \right)$
+We appreciate the constructive suggestions provided by Reviewer EBSh. Our response is as follows.
+Q1: I think this is an explicit assumption on the prior distribution, which contradicts $\spadesuit$ how can we obtain a tractable estimate for $\Phi (k)$ without presuming any particular prior distribution of $\hat{p}_{\boldsymbol{\theta}}\left(\mathbf{z}|k \right)$
 
-A1: 
-
+A1: Thank you for your concern. We argue that the use of exponential family of distribution doe not contradict to $\spadesuit$ since our method answesr $\spadesuit$ by designing an importance sampling-based estimator of $\Phi (k)$. The estimator itself does not rely on any prior knowledge on data distribution and therefore can be ideally applied to any kinds of density functions.
 #### Reviewer WvTp
+We thank Reviewer WvTp for your constructive suggestions. Our response is as follows.
+
 Q1: Clarify “Without loss of generality, we employ latent features z extracted from deep models as a surrogate for the original high-dimensional raw data x. This is because z is deterministic within the post-hoc framework”
 
-A1: 
+A1: We are sorry that our representation makes you confused. 
 
 Q2: Discuss the role of Deep generative models for flexible density estimation in OOD detection
 
@@ -30,13 +53,13 @@ Q3: List out all the assumptions made
 A3:
 
 #### Reviewer MqR8
-We thank the reviewer for the valuable and constructive comments and we have updated the submission accordingly. Please kindly find the detailed responses below.
+We thank reviewer MqR8 for the valuable and constructive comments and we have updated the submission accordingly. Please kindly find the detailed responses below.
 
 Q1: The main search problem of optimal coefficient for OOD scoring is remained as a hyperparameter search, which may constrain the practicality of the proposed score and How to choose $p$.
 
 A1.1: Thank you for your advice. We believe that it is necessary to find the optimal norm coefficient $p$ since the feature distribution of different datasets produced by different network architectures is not necessarily same as each other. Therefore, it is not reasonable to use a universal norm coefficient for all datasets. We also find that SOTA post-hoc OOD detection methods [a,b,c,d,e,f] come with (one or more) hyper-parameter searching as well, where their searched hyper-parameters vary across datasets. 
 
-A1.2: We use a subset of Tiny imagenet as the auxiliary OOD data. We remove those data whose labels coincide with ID and test-time OOD cases. The optimal p is selected from 1 and 3. We will add this details in the appendix. Please refer to Section A.3 in the revision for details.
+A1.2: We use a subset of Tiny imagenet as the auxiliary OOD data. We remove those data whose labels coincide with ID cases. The optimal p is selected from 1 and 3. We will add this details in the appendix. Please refer to Section A.3 in the revision for details.
 
 [a] Extremely simple activation shaping for out-of-distribution detection. ICLR 2023
 

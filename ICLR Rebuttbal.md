@@ -3,13 +3,13 @@ Dear Area Chairs and Reviewers,
 
 We would like to thank the reviewers again for their constructive and insightful comments, which help us a lot in improving the submission. We have uploaded the revised version and responded to all the reviewers in detail. We believe that the quality of the paper is improved and the contributions are solid. In particular, we would like to highlight some key materials we added:
 
-1.
-2.
-3.
-4.
-5.
-6.
-7. 
+>1.
+>2.
+>3.
+>4.
+>5.
+>6.
+>7. 
 
 We understand that reviewers are busy during the response period, we would greatly appreciate it if the reviewers can kindly advise if our responses solve their concerns. If there are any other suggestions/questions, we will try our best to provide satisfactory answers. We are looking forward to any further discussion with the reviewers. Thank you for your time.
 
@@ -31,7 +31,7 @@ We thank Reviewer WvTp for your insightful suggestions. As to the weaknesses and
 
 Q1: Clarify “Without loss of generality, we employ latent features z extracted from deep models as a surrogate for the original high-dimensional raw data $\mathbf{x}$. This is because $\mathbf{z}$ is deterministic within the post-hoc framework”
 
-A1: We are sorry that our presentation makes you confused. Here, what we intend to express is as follows. The latent feature space can be a suitable surrogate of raw input space for density estimation because 1) the space is lower dimensional and computationally much more efficient and 2) the pre-trained encoder $Enc(\cdot)$ is deterministic such that $p(\mathbf{z}|\mathbf{x})=1$ iff $\mathbf{z}=Enc(\mathbf{x})$. We modify our presentation in the revised version.
+A1: We are sorry that our presentation makes you confused. Here, what we intend to express is as follows. The latent feature space can be a suitable surrogate of raw input space for density estimation because 1) the latent feature space is lower-dimensional and therefore computationally much more efficient and 2) the pre-trained encoder $Enc(\cdot)$ is deterministic such that $p(\mathbf{z}|\mathbf{x})=1$ iff $\mathbf{z}=Enc(\mathbf{x})$. We modify our presentation in the revised version.
 
 Q2: Discuss the role of Deep generative models (DGMs) for flexible density estimation in OOD detection
 
@@ -47,18 +47,20 @@ $$\psi(\boldsymbol{\eta}_k)=\int \exp (\mathbf{z}^\top\boldsymbol{\eta}\_k)-g\_{
 
 
 #### Reviewer LYsh
-We thank Reviewer WvTp for your thorough suggestions and we have updated the submission accordingly. Our response is as follows.
-Q1: theoretical justification on the proposed method
+We thank Reviewer LYsh for your thorough suggestions and we have updated the submission accordingly. Our response is as follows.
 
-A1: 
+Q1: The second weakness is that the prior work (Morteza & Li, 2022) already proposed a method based on Gaussian assumptions and Mahalanobis distance. The extension in this paper, at least logically, is relatively straightforward, i.e., from Gaussian to Exponential Family and from Mahalaobis distance to Bregman-divergence (an extension). Maybe it's worth adding a section summarizing the paper's technical novelty.
 
-Q2: Comparing with prior work regarding the technical novelty
+A1: We thank you for your advice. The contributions of our method are summaried in section A.9 of the revision and as follows:
 
-A2: Thank you for your advice. We 
+>1. We propose a novel theoretical framework grounded in Bregman divergence to provide a unified perspective on density-based score design, where the Mahalaobis distance used in GEM and MaxMaha is a special case.
+>2. We reframe the design of density function as a search for the optimal norm coefficient p. In this way, compared to GEM, MaxMaha and Energy, all of which impose a fixed distributional assumption for all datasets, the distributional assumption is mild, flexible and switchable.
 
-Q3: List out all the assumptions made
+We included the above summary in Section A.9 of the revision.
 
-A3: Than you for your advice. The assumptions made in our method are listed as below:
+Q2: List out all the assumptions made
+
+A2: Than you for your advice. The assumptions made in our method are listed in section A.10 of the revision and as below:
 
 >Assumption 1: the uniform class prior on ID classes.
 
@@ -69,6 +71,10 @@ We note that Assumption 1 is also made in prior post-hoc ood detection methods e
 Assumption 2 made here aims to reduce the complexity of the exponential family distribution. While it is possible to parameterize the exponential family distribution in a more complicated manner, our proposed simple version already performs best on a wide range of datasets and settings.
 
 [a] Detecting Out-of-distribution Data through In-distribution Class Prior. ICML 2023
+
+Q3: theoretical justification on the proposed method
+
+A3: 
 
 #### Reviewer MqR8
 We thank reviewer MqR8 for your valuable comments and we have updated the submission accordingly. Please kindly find the detailed responses below. 

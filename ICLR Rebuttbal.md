@@ -1,4 +1,5 @@
-aaDear Area Chairs and Reviewers,
+
+Dear Area Chairs and Reviewers,
 
 We would like to thank the reviewers again for their constructive and insightful comments, which help us a lot in improving the submission. We have uploaded the revised version and responded to all the reviewers in detail. We believe that the quality of the paper is improved and the contributions are solid. In particular, we would like to highlight some key materials we added:
 
@@ -17,21 +18,20 @@ Best regards,
 The authors
 
 
-
-
 #### Reviewer EBSh
 We appreciate the constructive suggestions provided by Reviewer EBSh. Our response is as follows.
 
 Q1: I think this is an explicit assumption on the prior distribution, which contradicts $\spadesuit$ ( how can we obtain a tractable estimate for $\Phi (k)$ without presuming any particular prior distribution of $\hat{p}_{\boldsymbol{\theta}}\left(\mathbf{z}|k \right)$ )
 
-A1: Thank you for your concern. We argue that the use of exponential family of distribution doe not contradict to $\spadesuit$ since our method answesr $\spadesuit$ by designing an importance sampling-based estimator of $\Phi (k)$. The estimator itself does not rely on any prior knowledge on data distribution and therefore can be ideally applied to any forms of density functions $g_{\boldsymbol{\theta}}(\mathbf{z}, k)$.
+A1: Thank you for your concern. We argue that the use of exponential family of distribution doe not contradict to $\spadesuit$ since our method answers $\spadesuit$ by designing an importance sampling-based estimator of $\Phi (k)$. The estimator itself does not rely on any prior knowledge on data distribution and therefore can be ideally applied to any forms of density functions $g_{\boldsymbol{\theta}}(\mathbf{z}, k)$.
 
 #### Reviewer WvTp
-We thank Reviewer WvTp for your constructive suggestions. Our response is as follows.
 
-Q1: Clarify “Without loss of generality, we employ latent features z extracted from deep models as a surrogate for the original high-dimensional raw data x. This is because z is deterministic within the post-hoc framework”
+We thank Reviewer WvTp for your insightful suggestions. As to the weaknesses and minor issues you pointed out, we took them very seriously, and have updated parts of the paper to improve it. Please see below for details.
 
-A1: We are sorry that our presentation makes you confused. Here, what we intend to express is as follows. The latent feature space can be a suitable surrogate of raw input space for density estimation because 1) the space is lower dimensional and computationally much more efficient and 2) the pre-trained encoder Enc() is deterministic such that p(z|x)=1 iff z=Enc(x). We modify our presentation in the revised version.
+Q1: Clarify “Without loss of generality, we employ latent features z extracted from deep models as a surrogate for the original high-dimensional raw data $\mathbf{x}$. This is because $\mathbf{z}$ is deterministic within the post-hoc framework”
+
+A1: We are sorry that our presentation makes you confused. Here, what we intend to express is as follows. The latent feature space can be a suitable surrogate of raw input space for density estimation because 1) the space is lower dimensional and computationally much more efficient and 2) the pre-trained encoder $Enc(\cdot)$ is deterministic such that $p(\mathbf{z}|\mathbf{x})=1$ iff $\mathbf{z}=Enc(\mathbf{x})$. We modify our presentation in the revised version.
 
 Q2: Discuss the role of Deep generative models (DGMs) for flexible density estimation in OOD detection
 
@@ -41,23 +41,37 @@ A2: We thank you for bringing deep generative models into our eyes. We add the d
  
 Q3: Tell more about why learning the natural parameter of an Exp. Family intractable
 
-A3: Thank you for your advice. 
+A3: Thank you for your advice. We add the elaboration on this point in the revised version. In short, Learning the natural parameter of an Exp. Family is intractable because we need to solve the following equtation where an integral in a high-dimensional space is involved.
+
+$$\psi(\boldsymbol{\eta}_k)=\int \exp (\mathbf{z}^\top\boldsymbol{\eta}\_k)-g\_{\psi}(\mathbf{z}){\rm d}\mathbf{z}$$
+
 
 #### Reviewer LYsh
+We thank Reviewer WvTp for your thorough suggestions and we have updated the submission accordingly. Our response is as follows.
 Q1: theoretical justification on the proposed method
 
 A1: 
 
 Q2: Comparing with prior work regarding the technical novelty
 
-A2:
+A2: Thank you for your advice. We 
 
 Q3: List out all the assumptions made
 
-A3:
+A3: Than you for your advice. The assumptions made in our method are listed as below:
+
+>Assumption 1: the uniform class prior on ID classes.
+
+We note that Assumption 1 is also made in prior post-hoc ood detection methods either explicitly or implicitly [a]. Experiments in Section 4.4.2 show that our method still outperforms in long-tailed OOD detection even with Assumption 1.
+
+>Assumption 2:  $g_\varphi(\cdot)$ is a constant function and the cumulant function $\psi(\cdot) = \frac{1}{2}\|\|\cdot\|\|_{p}^{2}$
+
+Assumption 2 made here aims to reduce the complexity of the exponential family distribution. While it is possible to parameterize the exponential family distribution in a more complicated manner, our proposed simple version already performs best on a wide range of datasets and settings.
+
+[a] Detecting Out-of-distribution Data through In-distribution Class Prior. ICML 2023
 
 #### Reviewer MqR8
-We thank reviewer MqR8 for the valuable and constructive comments and we have updated the submission accordingly. Please kindly find the detailed responses below.
+We thank reviewer MqR8 for your valuable comments and we have updated the submission accordingly. Please kindly find the detailed responses below. 
 
 Q1: 1) The main search problem of optimal coefficient for OOD scoring is remained as a hyperparameter search, which may constrain the practicality of the proposed score, and 2) How to choose $p$.
 

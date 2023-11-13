@@ -31,7 +31,7 @@ We thank Reviewer WvTp for your insightful suggestions. As to the weaknesses and
 
 Q1: Clarify “Without loss of generality, we employ latent features z extracted from deep models as a surrogate for the original high-dimensional raw data $\mathbf{x}$. This is because $\mathbf{z}$ is deterministic within the post-hoc framework”
 
-A1: We are sorry that our presentation makes you confused. Here, what we intend to express is as follows. The latent feature space can be a suitable surrogate of raw input space for density estimation because 1) the latent feature space is lower-dimensional and therefore computationally much more efficient and 2) the pre-trained encoder $Enc(\cdot)$ is deterministic such that $p(\mathbf{z}|\mathbf{x})=1$ iff $\mathbf{z}=Enc(\mathbf{x})$. We modify our presentation in the revised version.
+A1: We are sorry that our presentation makes you confused. Here, what we intend to express is as follows. Since the pre-trained encoder $Enc(\cdot)$ is deterministic such that $p(\mathbf{z}|\mathbf{x})=1$ iff $\mathbf{z}=Enc(\mathbf{x})$, we consider the latent feature space as a suitable surrogate of the raw data space for density estimation since the former is lower-dimensional and therefore computationally much more efficient than the latter.
 
 Q2: Discuss the role of Deep generative models (DGMs) for flexible density estimation in OOD detection
 
@@ -92,6 +92,7 @@ $$\begin{aligned}
 $$\mathbf{I}\left\lbrace\mathcal{p}\_{\boldsymbol{\theta}}(\mathbf{z})\ge\lambda\right\rbrace\approx \mathbf{I}\left\lbrace\mathcal{p}(g = 1|z)\ge\frac{(1-\epsilon)\lambda}{(1-\epsilon)\lambda+\epsilon c_o\mathbf{I}(\lambda<\hat\beta)}\right\rbrace $$
 
 [b] Out-of-distribution detection with deep nearest neighbors. ICML 2022.
+
 [c] Robust estimation of a location parameter. Annals of Mathematical Statistics, 1964.
  
 Q4：it would be good if the authors could make the notations more distinguishable.
@@ -103,7 +104,7 @@ We thank reviewer MqR8 for your valuable comments. As to the weaknesses you poin
 
 Q1: 1) The main search problem of optimal coefficient for OOD scoring is remained as a hyperparameter search, which may constrain the practicality of the proposed score, and 2) How to choose $p$.
 
-A1.1: Thank you for your concern. We believe that it is necessary to find the optimal norm coefficient $p$ since the feature distribution of different datasets produced by different network architectures could not be necessarily same as each other. Therefore, it is not reasonable to use a universal norm coefficient for all datasets. We also observe that SOTA post-hoc OOD detection methods [a,b,c,d,e,f] come with (one or more) hyper-parameter searching as well, where their searched hyper-parameter values vary across datasets. 
+A1.1: Thank you for your concern. We believe that it is necessary to find the optimal norm coefficient $p$ since the latent feature distribution of different datasets could not be necessarily same as each other. Therefore, it is not reasonable to use a universal norm coefficient for all datasets. We also observe that SOTA post-hoc OOD detection methods [a,b,c,d,e,f] come with (one or more) hyper-parameter searching as well, where their searched hyper-parameter values vary across datasets. 
 
 A1.2: Simialr to [d], We use a subset of Tiny imagenet as the auxiliary OOD data. We remove those data whose labels coincide with ID cases. The searching space of $p$ is (1,3]. We will add this details in the appendix. Please refer to Section A.3 in the revision for details.
 

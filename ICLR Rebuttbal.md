@@ -68,7 +68,7 @@ We note that Assumption 1 is also made in prior post-hoc ood detection methods e
 
 >**Assumption 2.**  $g_\varphi(\cdot)$ is a constant function and the cumulant function $\psi(\cdot) = \frac{1}{2}\|\|\cdot\|\|_{p}^{2}$
 
-Assumption 2 made here aims to reduce the complexity of the exponential family distribution. While it is possible to parameterize the exponential family distribution in a more complicated manner, our proposed simple version already performs best on a wide range of datasets and settings.
+Assumption 2 made here aims to reduce the complexity of the exponential family distribution. While it is possible to parameterize the exponential family distribution in a more complicated manner, our proposed simple version suffices to perform well.
 
 [a] Detecting Out-of-distribution Data through In-distribution Class Prior. ICML 2023
 

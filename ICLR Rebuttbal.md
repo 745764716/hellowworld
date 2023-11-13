@@ -25,6 +25,7 @@ We appreciate the constructive suggestions provided by Reviewer EBSh. Our respon
 Q1: I think this is an explicit assumption on the prior distribution, which contradicts $\spadesuit$ ( how can we obtain a tractable estimate for $\Phi (k)$ without presuming any particular prior distribution of $\hat{p}_{\boldsymbol{\theta}}\left(\mathbf{z}|k \right)$ )
 
 A1: Thank you for your concern. We argue that the use of exponential family of distribution doe not contradict to $\spadesuit$ since our method answesr $\spadesuit$ by designing an importance sampling-based estimator of $\Phi (k)$. The estimator itself does not rely on any prior knowledge on data distribution and therefore can be ideally applied to any forms of density functions $g_{\boldsymbol{\theta}}(\mathbf{z}, k)$.
+
 #### Reviewer WvTp
 We thank Reviewer WvTp for your constructive suggestions. Our response is as follows.
 
@@ -34,16 +35,16 @@ A1: We are sorry that our representation makes you confused.
 
 Q2: Discuss the role of Deep generative models for flexible density estimation in OOD detection
 
-A2:
+A2: We thank for bringing deep generative models into our eyes. Of course, it is a technically valid and natural option []. However, this practice potentially violates the orignal intenstion of post-hoc 
 
 Q3: Tell more about why learning the natural parameter of an Exp. Family intractable
 
-A3:
+A3: Thank you for your advice. 
 
 #### Reviewer LYsh
 Q1: theoretical justification on the proposed method
 
-A1:
+A1: 
 
 Q2: Comparing with prior work regarding the technical novelty
 
@@ -56,11 +57,11 @@ A3:
 #### Reviewer MqR8
 We thank reviewer MqR8 for the valuable and constructive comments and we have updated the submission accordingly. Please kindly find the detailed responses below.
 
-Q1: The main search problem of optimal coefficient for OOD scoring is remained as a hyperparameter search, which may constrain the practicality of the proposed score and How to choose $p$.
+Q1: 1) The main search problem of optimal coefficient for OOD scoring is remained as a hyperparameter search, which may constrain the practicality of the proposed score, and 2) How to choose $p$.
 
-A1.1: Thank you for your advice. We believe that it is necessary to find the optimal norm coefficient $p$ since the feature distribution of different datasets produced by different network architectures is not necessarily same as each other. Therefore, it is not reasonable to use a universal norm coefficient for all datasets. We also find that SOTA post-hoc OOD detection methods [a,b,c,d,e,f] come with (one or more) hyper-parameter searching as well, where their searched hyper-parameters vary across datasets. 
+A1.1: Thank you for your concern. We believe that it is necessary to find the optimal norm coefficient $p$ since the feature distribution of different datasets produced by different network architectures could not be necessarily same as each other. Therefore, it is not reasonable to use a universal norm coefficient for all datasets. We also observe that SOTA post-hoc OOD detection methods [a,b,c,d,e,f] come with (one or more) hyper-parameter searching as well, where their searched hyper-parameter values vary across datasets. 
 
-A1.2: We use a subset of Tiny imagenet as the auxiliary OOD data. We remove those data whose labels coincide with ID cases. The optimal p is selected from 1 and 3. We will add this details in the appendix. Please refer to Section A.3 in the revision for details.
+A1.2: Simialr to [d], We use a subset of Tiny imagenet as the auxiliary OOD data. We remove those data whose labels coincide with ID cases. The searching space of $p$ is (1,3]. We will add this details in the appendix. Please refer to Section A.3 in the revision for details.
 
 [a] Extremely simple activation shaping for out-of-distribution detection. ICLR 2023
 

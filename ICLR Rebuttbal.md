@@ -3,13 +3,14 @@ Dear Area Chairs and Reviewers,
 
 We would like to thank the reviewers again for their constructive and insightful comments, which help us a lot in improving the submission. We have uploaded the revised version and responded to all the reviewers in detail. We believe that the quality of the paper is improved and the contributions are solid. In particular, we would like to highlight some key materials we added:
 
->1.
->2.
->3.
->4.
->5.
->6.
->7. 
+>1. improve the confusing presentations and the use of notations .
+>2. Discussion on Deep generative models (DGMs) as our related work
+>3. elaboration on why learning the natural parameter of an Exp. Family is intractable
+>4. contribution summary
+>5. list of assumptions made in our method
+>6. theoretical justification of our method
+>7. The searching Strategy of the norm coefficient $p$
+>8. More dicussion on experiments in Section 4.4.2
 
 We understand that reviewers are busy during the response period, we would greatly appreciate it if the reviewers can kindly advise if our responses solve their concerns. If there are any other suggestions/questions, we will try our best to provide satisfactory answers. We are looking forward to any further discussion with the reviewers. Thank you for your time.
 
@@ -19,7 +20,7 @@ The authors
 
 
 #### Reviewer EBSh
-We appreciate the constructive suggestions provided by Reviewer EBSh. Our response is as follows.
+We appreciate the constructive suggestions provided by Reviewer EBSh. As to the weaknesses you pointed out, we took them very seriously. Our response is as follows.
 
 Q1: I think this is an explicit assumption on the prior distribution, which contradicts $\spadesuit$ ( how can we obtain a tractable estimate for $\Phi (k)$ without presuming any particular prior distribution of $\hat{p}_{\boldsymbol{\theta}}\left(\mathbf{z}|k \right)$ )
 
@@ -39,7 +40,7 @@ A2: We thank you for bringing deep generative models into our eyes. We add the d
 
 [a] Your Diffusion Model is Secretly a Zero-Shot Classifier. ICCV 2023.
  
-Q3: Tell more about why learning the natural parameter of an Exp. Family intractable
+Q3: Tell more about why learning the natural parameter of an Exp. Family is intractable
 
 A3: Thank you for your advice. We add the elaboration on this point in the revised version. In short, Learning the natural parameter of an Exp. Family is intractable because we need to solve the following equtation where an integral in a high-dimensional space is involved.
 
@@ -47,7 +48,7 @@ $$\psi(\boldsymbol{\eta}_k)=\int \exp (\mathbf{z}^\top\boldsymbol{\eta}\_k)-g\_{
 
 
 #### Reviewer LYsh
-We thank Reviewer LYsh for your thorough suggestions and we have updated the submission accordingly. Our response is as follows.
+We thank Reviewer LYsh for your thorough suggestions. As to the weaknesses and minor issues you pointed out, we took them very seriously, and have updated parts of the paper to improve it. Our response is as follows.
 
 Q1: The second weakness is that the prior work (Morteza & Li, 2022) already proposed a method based on Gaussian assumptions and Mahalanobis distance. The extension in this paper, at least logically, is relatively straightforward, i.e., from Gaussian to Exponential Family and from Mahalaobis distance to Bregman-divergence (an extension). Maybe it's worth adding a section summarizing the paper's technical novelty.
 
@@ -76,8 +77,12 @@ Q3: theoretical justification on the proposed method
 
 A3: 
 
+Q4：it would be good if the authors could make the notations more distinguishable.
+
+A4: Thank you for your advice. we have improve our use of notations in the revision.
+
 #### Reviewer MqR8
-We thank reviewer MqR8 for your valuable comments and we have updated the submission accordingly. Please kindly find the detailed responses below. 
+We thank reviewer MqR8 for your valuable comments. As to the weaknesses you pointed out, we took them very seriously, and have updated parts of the paper to improve it. Please kindly find the detailed responses below. 
 
 Q1: 1) The main search problem of optimal coefficient for OOD scoring is remained as a hyperparameter search, which may constrain the practicality of the proposed score, and 2) How to choose $p$.
 

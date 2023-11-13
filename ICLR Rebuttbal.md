@@ -9,7 +9,7 @@ We would like to thank the reviewers again for their constructive and insightful
 >5. list of assumptions made in our method
 >6. theoretical justification of our method
 >7. The searching Strategy of the norm coefficient $p$
->8. More dicussion on experiments in Section 4.4.2
+>8. More dicussion on experiment results of long-tailed OOD detection
 
 We understand that reviewers are busy during the response period, we would greatly appreciate it if the reviewers can kindly advise if our responses solve their concerns. If there are any other suggestions/questions, we will try our best to provide satisfactory answers. We are looking forward to any further discussion with the reviewers. Thank you for your time.
 
@@ -72,12 +72,12 @@ Assumption 2 made here aims to reduce the complexity of the exponential family d
 
 [a] Detecting Out-of-distribution Data through In-distribution Class Prior. ICML 2023
 
-Q3: theoretical justification on the proposed method
+Q3: theoretical justification
 
 A3: Here, same as KNN [b], we provice a theoretical analysis on our method by analyzing the average OOD detection performance of our algorithm in Section A.11 and as follows. 
 >**Setup.** We consider the OOD detection task as a special binary classification task, where the negative samples (OOD) are only available in the testing stage. We assume the input is from feature embeddings space $\mathcal{Z}$ and the labeling set $\mathcal{G}= \left\lbrace 0(OOD),1(ID) \right\rbrace$. In the inference stage, the testing set $\left\lbrace(\mathbf{z},g)\right\rbrace$ is drawn i.i.d. from $P_{\mathcal{Z} \mathcal{G}}$. Denote the marginal distribution on $\mathcal{Z}$ as $\mathcal{P}$, We adopt the Huber contamination model [] to model the fact that we may encounter both ID and OOD data in test time:
 $$\mathcal{P}=(1-\epsilon)\mathcal{P}_I+\epsilon \mathcal{P}_O$$
-where $\mathcal{P}_I$ and $\mathcal{P}_o$ are the underlying distributions of feature embeddings for ID and OOD data, respectively, and $\epsilon$ is a constant controlling the fraction of OOD samples in testing. We use $\mathcal{p}_I(\mathbf{z})$ and $\mathcal{p}_o(\mathbf{z})$ to denote the probability density function, where $\mathcal{p}_I(\mathbf{z}) = \mathcal{p}(z|g = 1)$ and $\mathcal{p}_o(\mathbf{z}) = \mathcal{p}(z|g = 0)$. It is natural to approximate $\mathcal{p}_I(\mathbf{z})$ as $\mathcal{p}\_{\boldsymbol{\theta}}(\mathbf{z})$ in Eq.(11). Following KNN, we apprximate OOD distribution by modeling OOD data with an equal chance to appear outside of the high-density region of ID data, i.e., $\mathcal{p}_o(\mathbf{z})=c_o \mathbf{I}\left\lbrace\mathcal{p}\_{\boldsymbol{\theta}}(\mathbf{z})<\beta\right\rbrace$. Given the fact that $\mathcal{p}_o(\mathbf{z})=0$ if $z \in \left\lbrace Enc(\mathbf{x})|\mathbf{x}\in X\_I \right\rbrace$, the empirical esitimator of $\beta$ is given by $\hat\beta = \min\_{(\mathbf{x},\mathbf{y})\in \mathcal{D}\_{\rm in}} \mathcal{p}\_{\boldsymbol{\theta}}(Enc(\mathbf{x}))$.
+where $\mathcal{P}_I$ and $\mathcal{P}_o$ are the underlying distributions of feature embeddings for ID and OOD data, respectively, and $\epsilon$ is a constant controlling the fraction of OOD samples in testing. We use $\mathcal{p}_I(\mathbf{z})$ and $\mathcal{p}_o(\mathbf{z})$ to denote the probability density function, where $\mathcal{p}_I(\mathbf{z}) = \mathcal{p}(z|g = 1)$ and $\mathcal{p}_o(\mathbf{z}) = \mathcal{p}(z|g = 0)$. It is natural to approximate $\mathcal{p}_I(\mathbf{z})$ as $\mathcal{p}\_{\boldsymbol{\theta}}(\mathbf{z})$ in Eq.(11). Following KNN, we apprximate OOD distribution by modeling OOD data with an equal chance to appear outside of the high-density region of ID data, i.e., $\mathcal{p}_o(\mathbf{z})=c_o \mathbf{I}\left\lbrace\mathcal{p}\_{\boldsymbol{\theta}}(\mathbf{z})<\beta\right\rbrace$. Given the fact that $\mathcal{p}_o(\mathbf{z})=0$ if $z \in \left\lbrace Enc(\mathbf{x})|\mathbf{x}\in X\_I \right\rbrace$, the empirical esitimator of $\beta$ is given by $\hat\beta = \min\_{(\mathbf{x},\mathbf{y})\in \mathcal{D}\_{\rm in}} \mathcal{p}\_{\boldsymbol{\theta}}(Enc(\mathbf{x}))$ with $Enc(\cdot)$ as the encoder of a pre-train model.
 
 >**Main result 1.** By the Bayesian rule, the probability of $\mathbf{z}$ being ID data is:
 

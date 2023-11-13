@@ -31,12 +31,14 @@ We thank Reviewer WvTp for your constructive suggestions. Our response is as fol
 
 Q1: Clarify “Without loss of generality, we employ latent features z extracted from deep models as a surrogate for the original high-dimensional raw data x. This is because z is deterministic within the post-hoc framework”
 
-A1: We are sorry that our representation makes you confused. 
+A1: We are sorry that our representation makes you confused. Here, what we intend to express is that 
 
-Q2: Discuss the role of Deep generative models for flexible density estimation in OOD detection
+Q2: Discuss the role of Deep generative models (DGMs) for flexible density estimation in OOD detection
 
-A2: We thank for bringing deep generative models into our eyes. Of course, it is a technically valid and natural option []. However, this practice potentially violates the orignal intenstion of post-hoc 
+A2: We thank you for bringing deep generative models into our eyes. We add the discussion on Deep generative models for flexible density estimation in OOD detection in Section A.8 of the revised version. We agree that using DGMs for flexible density estimation is, of course, a valid and natural option. However, this practice requires to train a new DGM from scratch. More importantly, if one can estimate ID data density with a newly trained DGM, it is possible that the pre-trained (discriminative) model can be totally discarded throughout OOD detection, which potentially violates the original intention of post-hoc OOD detection. We also notice that, while it is theoretically possible for zero-shot density estimation with pre-trained diffusion models based on Eq.(1) in [a], the computation is intractable due to the integral. Although the authors in [a] use a simplified ELBO for approximation, there is no theoretical guarantee that the ELBO can align with the ID data density not to mention the time-inefficient inference of diffusion models. We will leave this challenge as our future work.
 
+[a] Your Diffusion Model is Secretly a Zero-Shot Classifier. ICCV 2023.
+ 
 Q3: Tell more about why learning the natural parameter of an Exp. Family intractable
 
 A3: Thank you for your advice. 

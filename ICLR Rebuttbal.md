@@ -1,4 +1,3 @@
-
 Dear Area Chairs and Reviewers,
 
 We would like to thank the reviewers again for their constructive and insightful comments, which help us a lot in improving the submission. We have uploaded the revised version and responded to all the reviewers in detail. We believe that the quality of the paper is improved and the contributions are solid. In particular, we would like to highlight some key materials we added:
@@ -63,11 +62,11 @@ Q2: List out all the assumptions made
 
 A2: Than you for your advice. The assumptions made in our method are listed in section A.10 of the revision and as below:
 
->Assumption 1: the uniform class prior on ID classes.
+>**Assumption 1.** the uniform class prior on ID classes.
 
 We note that Assumption 1 is also made in prior post-hoc ood detection methods either explicitly or implicitly [a]. Experiments in Section 4.4.2 show that our method still outperforms in long-tailed OOD detection even with Assumption 1.
 
->Assumption 2:  $g_\varphi(\cdot)$ is a constant function and the cumulant function $\psi(\cdot) = \frac{1}{2}\|\|\cdot\|\|_{p}^{2}$
+>**Assumption 2.**  $g_\varphi(\cdot)$ is a constant function and the cumulant function $\psi(\cdot) = \frac{1}{2}\|\|\cdot\|\|_{p}^{2}$
 
 Assumption 2 made here aims to reduce the complexity of the exponential family distribution. While it is possible to parameterize the exponential family distribution in a more complicated manner, our proposed simple version already performs best on a wide range of datasets and settings.
 
@@ -75,8 +74,26 @@ Assumption 2 made here aims to reduce the complexity of the exponential family d
 
 Q3: theoretical justification on the proposed method
 
-A3: 
+A3: Here, same as KNN [b], we provice a theoretical analysis on our method by analyzing the average OOD detection performance of our algorithm in Section A.11 and as follows. 
+>**Setup.** We consider the OOD detection task as a special binary classification task, where the negative samples (OOD) are only available in the testing stage. We assume the input is from feature embeddings space $\mathcal{Z}$ and the labeling set $\mathcal{G}= \left\lbrace 0(OOD),1(ID) \right\rbrace$. In the inference stage, the testing set $\left\lbrace(\mathbf{z},g)\right\rbrace$ is drawn i.i.d. from $P_{\mathcal{Z} \mathcal{G}}$. Denote the marginal distribution on $\mathcal{Z}$ as $\mathcal{P}$, We adopt the Huber contamination model [] to model the fact that we may encounter both ID and OOD data in test time:
+$$\mathcal{P}=(1-\epsilon)\mathcal{P}_I+\epsilon \mathcal{P}_O$$
+where $\mathcal{P}_I$ and $\mathcal{P}_o$ are the underlying distributions of feature embeddings for ID and OOD data, respectively, and $\epsilon$ is a constant controlling the fraction of OOD samples in testing. We use $\mathcal{p}_I(\mathbf{z})$ and $\mathcal{p}_o(\mathbf{z})$ to denote the probability density function, where $\mathcal{p}_I(\mathbf{z}) = \mathcal{p}(z|g = 1)$ and $\mathcal{p}_o(\mathbf{z}) = \mathcal{p}(z|g = 0)$. It is natural to approximate $\mathcal{p}_I(\mathbf{z})$ as $\mathcal{p}\_{\boldsymbol{\theta}}(\mathbf{z})$ in Eq.(11). Following KNN, we apprximate OOD distribution by modeling OOD data with an equal chance to appear outside of the high-density region of ID data, i.e., $\mathcal{p}_o(\mathbf{z})=c_o \mathbf{I}\left\lbrace\mathcal{p}\_{\boldsymbol{\theta}}(\mathbf{z})<\beta\right\rbrace$. Given the fact that $\mathcal{p}_o(\mathbf{z})=0$ if $z \in \left\lbrace Enc(\mathbf{x})|\mathbf{x}\in X\_I \right\rbrace$, the empirical esitimator of $\beta$ is given by $\hat\beta = \min\_{(\mathbf{x},\mathbf{y})\in \mathcal{D}\_{\rm in}} \mathcal{p}\_{\boldsymbol{\theta}}(Enc(\mathbf{x}))$.
 
+>**Main result 1.** By the Bayesian rule, the probability of $\mathbf{z}$ being ID data is:
+
+$$\begin{aligned}
+\mathcal{p}(g = 1|\mathbf{z}) &= \frac{\mathcal{p}(\mathbf{z}|g = 1)\cdot\mathcal{p}(g = 1)}{\mathcal{p}(\mathbf{z}|g = 1)\cdot\mathcal{p}(g = 1)+\mathcal{p}(\mathbf{z}|g = 0)\cdot\mathcal{p}(g = 0)} \\
+&= \frac{(1-\epsilon)\mathcal{p}(\mathbf{z}|g = 1)}{(1-\epsilon)\mathcal{p}(\mathbf{z}|g = 1)+\epsilon\mathcal{p}(\mathbf{z}|g = 0)} \\
+&\approx \frac{(1-\epsilon)\mathcal{p}\_{\boldsymbol{\theta}}(\mathbf{z})}{(1-\epsilon)\mathcal{p}\_{\boldsymbol{\theta}}(\mathbf{z})+\epsilon c_o\mathbf{I}\left\lbrace\mathcal{p}\_{\boldsymbol{\theta}}(\mathbf{z})<\hat\beta\right\rbrace}
+\end{aligned}$$
+
+>**Main result 2.** Given a pre-defined threshold $\lambda$, it can be easily checked that:
+
+$$\mathbf{I}\left\lbrace\mathcal{p}\_{\boldsymbol{\theta}}(\mathbf{z})\ge\lambda\right\rbrace\approx \mathbf{I}\left\lbrace\mathcal{p}(g = 1|z)\ge\frac{(1-\epsilon)\lambda}{(1-\epsilon)\lambda+\epsilon c_o\mathbf{I}(\lambda<\hat\beta)}\right\rbrace $$
+
+[b] Out-of-distribution detection with deep nearest neighbors. ICML 2022.
+[c] Robust estimation of a location parameter. Annals of Mathematical Statistics, 1964.
+ 
 Q4：it would be good if the authors could make the notations more distinguishable.
 
 A4: Thank you for your advice. we have improve our use of notations in the revision.

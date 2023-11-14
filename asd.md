@@ -102,19 +102,19 @@ Q4：it would be good if the authors could make the notations more distinguishab
 A4: Thank you for your advice. we have improve our use of notations in the revision.
 
 #### Reviewer MqR8
-We thank reviewer MqR8 for your valuable comments. As to the weaknesses you pointed out, we took them very seriously, and have updated parts of the paper to improve it. Please kindly find the detailed responses below. 
+We thank reviewer MqR8 for your valuable comments. We updated the submission accordingly. Please kindly find the detailed responses below. 
 
-Q1: 1) The main search problem of optimal coefficient for OOD scoring is remained as a hyperparameter search, which may constrain the practicality of the proposed score, and 2) How to choose $p$.
+Q1: 1) The main search problem of optimal coefficient for OOD scoring remains as a hyperparameter search, which may constrain the practicality of the proposed score, and 2) How to choose $p$.
 
-A1.1: Thank you for your concern. We believe that it is necessary to find the optimal norm coefficient $p$ since the latent feature distribution of different datasets could not be necessarily same as each other. Therefore, it is not reasonable to use a universal norm coefficient for all datasets. We also observe that SOTA post-hoc OOD detection methods [a,b,c,d,e,f] come with (one or more) hyper-parameter searching as well, where their searched hyper-parameter values vary across datasets. 
+A1.1: We believe that the ability to search the optimal norm coefficient $p$ is a strength of our method indeed. This is because the latent feature distribution of different datasets could not be necessarily the same as each other. By simply adjusting the value of the norm coefficient, we can succeed in finding the (relatively) most suitable distribution from the exponential family for each dataset in a computationally efficient manner. We also observe that SOTA post-hoc OOD detection methods [a,b,c,d,e,f] come with (one or more) hyper-parameters as well, where their searched values vary across datasets. 
 
-A1.2: Simialr to [d], We use a subset of Tiny imagenet as the auxiliary OOD data. We remove those data whose labels coincide with ID cases. The searching space of $p$ is (1,3]. We will add this details in the appendix. Please refer to Section A.3 in the revision for details.
+A1.2: Similar to [d], We use a subset of Tiny ImageNet as the auxiliary OOD data. We remove those data whose labels coincide with ID cases. We empirically find that setting (1,3] as the searching space of $p$ suffices to work well on CIFAR and ImageNet datasets. We will add the details in the appendix. Please refer to Section A.3 in the revision for details.
 
 [a] Extremely simple activation shaping for out-of-distribution detection. ICLR 2023
 
 [b] LINe: Out-of-Distribution Detection by Leveraging Important Neurons. CVPR 2023
 
-[c] Out-of-distribution detection with deep nearest neighbors. ICML 2022.
+[c] Out-of-distribution detection with deep nearest neighbours. ICML 2022.
 
 [d] Dice: Leveraging sparsification for out-of-distribution detection. ECCV 2022
  
@@ -122,10 +122,11 @@ A1.2: Simialr to [d], We use a subset of Tiny imagenet as the auxiliary OOD data
 
 Q2: For long-tailed OOD detection when the ID training data exhibits an imbalanced class distribution, I guess the accuracy of the importance sampling-based estimation may decrease given a limited number of tail-class predictions. Elaborate why their method still outperforms in the long-tailed scenarios.
 
-A2:  We agree with your insightful intuition. The table below shows that, compared with estimation based on the full CIFAR-100 training dataset (ii), estimation based on the long-tailed version of the CIFAR-100 training dataset (i) will result in worse OOD detection performance. However, this does not prevent our method from outperforming in this scenario, which implies the robustness and flexibility of the importance sampling-based estimation in our method. We have revised the submission accordingly by adding a discussion on the experiment results of Table 4. Please refer to Section 4.4.2 in the revision for details.
+A2:  We agree with your insightful intuition since class imbalance is widely recognized as a challenging setting. As shown in the Table below, all methods that involve the use of ID training data suffer from a decrease in their averaged OOD detection performance when the ID training data is long-tailed. Note that we keep using the network pre-trained on the long-tailed version of CIFAR-100 for fair comparison. Even so, it can be found that the performance degeneration of our method is less noticeable than other counterparts. We suspect that the flexibility of the norm coefficient provides us with the chance to find a compromised distribution from the exponential family. We have revised the submission accordingly by adding the discussion above. Please refer to Section A.12 in the revision for details.
 
-|      Baseline  |      SVHN    |              |      LSUN    |              |      iSUN    |              |     Textures    |              |     Places       |              |     Average    |              |
-|:--------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:---------------:|:------------:|:----------------:|:------------:|:--------------:|:------------:|
-|                |     FPR95    |     AUROC    |     FPR95    |     AUROC    |     FPR95    |     AUROC    |       FPR95     |     AUROC    |       FPR95      |     AUROC    |      FPR95     |     AUROC    |
-|       (i)      |     40.16    |     91.00    |     45.72    |     87.64    |     41.89    |     90.42    |       40.50     |     86.80    |       91.74      |     58.44    |      52.00     |     82.86    |
-|       (ii)     |     35.66    |     91.51    |     42.40    |     89.81    |     40.41    |     90.59    |       34.54     |     88.90    |       89.28      |     62.84    |      48.46     |     84.73    |
+
+|      Baseline  |   MaxMaha    |              |      KNN     |              |      GEM     |              |       Ours      |              |   
+|:--------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|:---------------:|:------------:|
+|                |     FPR95    |     AUROC    |     FPR95    |     AUROC    |     FPR95    |     AUROC    |       FPR95     |     AUROC    |
+|       (i)      |     40.16    |     91.00    |     45.72    |     87.64    |     41.89    |     90.42    |       52.00     |     82.86    |
+|       (ii)     |     35.66    |     91.51    |     42.40    |     89.81    |     40.41    |     90.59    |       48.46     |     84.73    |

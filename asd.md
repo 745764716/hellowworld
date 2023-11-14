@@ -53,33 +53,38 @@ We thank Reviewer LYsh for your thorough suggestions. As to the weaknesses and m
 
 Q1: The second weakness is that the prior work (Morteza & Li, 2022) already proposed a method based on Gaussian assumptions and Mahalanobis distance. The extension in this paper, at least logically, is relatively straightforward, i.e., from Gaussian to Exponential Family and from Mahalaobis distance to Bregman-divergence (an extension). Maybe it's worth adding a section summarizing the paper's technical novelty.
 
-A1: We thank you for your advice. The contributions of our method are summaried in section A.9 of the revision and as follows:
+A1: We thank you for your advice. The contributions of our method are summarised as follows:
 
->1. We propose a novel theoretical framework grounded in Bregman divergence to provide a unified perspective on density-based score design, where the Mahalaobis distance used in GEM and MaxMaha is a special case.
->2. We reframe the design of density function as a search for the optimal norm coefficient p. In this way, compared to GEM, MaxMaha and Energy, all of which impose a fixed distributional assumption for all datasets, the distributional assumption is mild, flexible and switchable.
+>1 It is always non-trivial to generalize from a specific distribution/distance to a broader distribution/distance family since this will trigger an important question to the optimal design of the underlying distribution ($\clubsuit$).To answer this question, we explore the conjugate relationship as a guideline for the design. Compared with other hand-crafted choices, our proposed $l_p$ norm is general and well-defined, offering simplicity in determining its conjugate pair. By searching the optimal value of p for each dataset, we can flexibly model ID data in a data-driven manner instead of blindly adopting a narrow Gaussian distributional assumption in prior work, i.e., GEM and MaxMaha.
 
-We included the above summary in Section A.9 of the revision.
+>2 Our proposed framework reveals the core components in density estimation for OOD detection, which was overlooked by most heuristic-based OOD papers. In this way, The framework not only inherits prior work including GEM and MaxMAHA but also motivates further work to explore more effective designing principles of density functions for OOD detection.
+
+>3 We demonstrate the superior performance of our method on several OOD detection benchmarks (CIFAR10/100 and ImageNet-1K), different model architectures (DenseNet, ResNet, and MobileNet), and different pre-training protocols (standard classification, long-tailed classification and Contrastive learning).
+
+We included the summary above in Section A.9 of the revision.
 
 Q2: List out all the assumptions made
 
-A2: Than you for your advice. The assumptions made in our method are listed in section A.10 of the revision and as below:
+A2: Thank you for your advice. The assumptions made in our method are given as follows:
 
->**Assumption 1.** the uniform class prior on ID classes.
+>**Assumption 1.** The uniform ID class prior.
 
-We note that Assumption 1 is also made in prior post-hoc ood detection methods either explicitly or implicitly [a]. Experiments in Section 4.4.2 show that our method still outperforms in long-tailed OOD detection even with Assumption 1.
+We note that Assumption 1 is also made in many post-hoc OOD detection methods either explicitly or implicitly [a]. Experiments in Section 4.4.2 show that our method still outperforms in long-tailed scenarios with Assumption 1.
 
->**Assumption 2.**  $g_\varphi(\cdot)$ is a constant function and the cumulant function $\psi(\cdot) = \frac{1}{2}\|\|\cdot\|\|_{p}^{2}$
+>**Assumption 2.**  $g_\varphi(\cdot)=const$ and $\psi(\cdot) = \frac{1}{2}\|\|\cdot\|\|_{p}^{2}$
 
-Assumption 2 made here aims to reduce the complexity of the exponential family distribution. While it is possible to parameterize the exponential family distribution in a more complicated manner, our proposed simple version suffices to perform well.
+Assumption 2 helps to reduce the complexity of the exponential family distribution. While it is possible to parameterize the exponential family distribution in a more complicated manner, our proposed simple version suffices to perform well.
+
+We listed the assumptions above in Section A.10 of the revision.
 
 [a] Detecting Out-of-distribution Data through In-distribution Class Prior. ICML 2023
 
 Q3: theoretical justification
 
-A3: Here, same as KNN [b], we provice a theoretical analysis on our method by analyzing the average OOD detection performance of our algorithm in Section A.11 and as follows. 
+A3: Here, same as KNN [b], we provide a theoretical analysis of our method by analyzing the average OOD detection performance of our algorithm in Section A.11 and as follows. 
 >**Setup.** We consider the OOD detection task as a special binary classification task, where the negative samples (OOD) are only available in the testing stage. We assume the input is from feature embeddings space $\mathcal{Z}$ and the labeling set $\mathcal{G}= \left\lbrace 0(OOD),1(ID) \right\rbrace$. In the inference stage, the testing set $\left\lbrace(\mathbf{z},g)\right\rbrace$ is drawn i.i.d. from $P_{\mathcal{Z} \mathcal{G}}$. Denote the marginal distribution on $\mathcal{Z}$ as $\mathcal{P}$, We adopt the Huber contamination model [] to model the fact that we may encounter both ID and OOD data in test time:
 $$\mathcal{P}=(1-\epsilon)\mathcal{P}_I+\epsilon \mathcal{P}_O$$
-where $\mathcal{P}_I$ and $\mathcal{P}_o$ are the underlying distributions of feature embeddings for ID and OOD data, respectively, and $\epsilon$ is a constant controlling the fraction of OOD samples in testing. We use $\mathcal{p}_I(\mathbf{z})$ and $\mathcal{p}_o(\mathbf{z})$ to denote the probability density function, where $\mathcal{p}_I(\mathbf{z}) = \mathcal{p}(z|g = 1)$ and $\mathcal{p}_o(\mathbf{z}) = \mathcal{p}(z|g = 0)$. It is natural to approximate $\mathcal{p}_I(\mathbf{z})$ as $\mathcal{p}\_{\boldsymbol{\theta}}(\mathbf{z})$ in Eq.(11). Following KNN, we apprximate OOD distribution by modeling OOD data with an equal chance to appear outside of the high-density region of ID data, i.e., $\mathcal{p}_o(\mathbf{z})=c_o \mathbf{I}\left\lbrace\mathcal{p}\_{\boldsymbol{\theta}}(\mathbf{z})<\beta\right\rbrace$. Given the fact that $\mathcal{p}_o(\mathbf{z})=0$ if $z \in \left\lbrace Enc(\mathbf{x})|\mathbf{x}\in X\_I \right\rbrace$, the empirical esitimator of $\beta$ is given by $\hat\beta = \min\_{(\mathbf{x},\mathbf{y})\in \mathcal{D}\_{\rm in}} \mathcal{p}\_{\boldsymbol{\theta}}(Enc(\mathbf{x}))$ with $Enc(\cdot)$ as the encoder of a pre-train model.
+where $\mathcal{P}_I$ and $\mathcal{P}_o$ are the underlying distributions of feature embeddings for ID and OOD data, respectively, and $\epsilon$ is a constant controlling the fraction of OOD samples in testing. We use $\mathcal{p}_I(\mathbf{z})$ and $\mathcal{p}_o(\mathbf{z})$ to denote the probability density function, where $\mathcal{p}_I(\mathbf{z}) = \mathcal{p}(z|g = 1)$ and $\mathcal{p}_o(\mathbf{z}) = \mathcal{p}(z|g = 0)$. It is natural to approximate $\mathcal{p}_I(\mathbf{z})$ as $\mathcal{p}\_{\boldsymbol{\theta}}(\mathbf{z})$ in Eq.(11). Following KNN, we apprximate OOD distribution by modelling OOD data with an equal chance to appear outside of the high-density region of ID data, i.e., $\mathcal{p}_o(\mathbf{z})=c_o \mathbf{I}\left\lbrace\mathcal{p}\_{\boldsymbol{\theta}}(\mathbf{z})<\beta\right\rbrace$. Given the fact that $\mathcal{p}_o(\mathbf{z})=0$ if $z \in \left\lbrace Enc(\mathbf{x})|\mathbf{x}\in X\_I \right\rbrace$, the empirical esitimator of $\beta$ is given by $\hat\beta = \min\_{(\mathbf{x},\mathbf{y})\in \mathcal{D}\_{\rm in}} \mathcal{p}\_{\boldsymbol{\theta}}(Enc(\mathbf{x}))$ with $Enc(\cdot)$ as the encoder of a pre-train model.
 
 >**Main result 1.** By the Bayesian rule, the probability of $\mathbf{z}$ being ID data is:
 
@@ -93,22 +98,22 @@ $$\begin{aligned}
 
 $$\mathbf{I}\left\lbrace\mathcal{p}\_{\boldsymbol{\theta}}(\mathbf{z})\ge\lambda\right\rbrace\approx \mathbf{I}\left\lbrace\mathcal{p}(g = 1|z)\ge\frac{(1-\epsilon)\lambda}{(1-\epsilon)\lambda+\epsilon c_o\mathbf{I}(\lambda<\hat\beta)}\right\rbrace $$
 
-[b] Out-of-distribution detection with deep nearest neighbors. ICML 2022.
+[b] Out-of-distribution detection with deep nearest neighbours. ICML 2022.
 
 [c] Robust estimation of a location parameter. Annals of Mathematical Statistics, 1964.
  
-Q4：it would be good if the authors could make the notations more distinguishable.
+Q4: It would be good if the authors could make the notations more distinguishable.
 
-A4: Thank you for your advice. we have improve our use of notations in the revision.
+A4: Thank you for your advice. we have improved our use of notations in the revision.
 
 #### Reviewer MqR8
 We thank reviewer MqR8 for your valuable comments. We updated the submission accordingly. Please kindly find the detailed responses below. 
 
 Q1: 1) The main search problem of optimal coefficient for OOD scoring remains as a hyperparameter search, which may constrain the practicality of the proposed score, and 2) How to choose $p$.
 
-A1.1: We believe that the ability to search the optimal norm coefficient $p$ is a strength of our method indeed. This is because the latent feature distribution of different datasets could not be necessarily the same as each other. By simply adjusting the value of the norm coefficient, we can succeed in finding the (relatively) most suitable distribution from the exponential family for each dataset in a computationally efficient manner. We also observe that SOTA post-hoc OOD detection methods [a,b,c,d,e,f] come with (one or more) hyper-parameters as well, where their searched values vary across datasets. 
+A1.1: We believe that the ability to search the optimal norm coefficient $p$ is a strength of our method indeed. This is because the latent feature distribution of different datasets could not be necessarily the same as each other. By simply adjusting the value of the norm coefficient, we can succeed in finding the (relatively) most suitable distribution from the exponential family for each ID dataset in a computationally efficient manner. We also observe that SOTA post-hoc OOD detection methods [a,b,c,d,e,f] come with (one or more) hyper-parameters as well, where their searched values vary across datasets. 
 
-A1.2: Similar to [d], We use a subset of Tiny ImageNet as the auxiliary OOD data. We remove those data whose labels coincide with ID cases. We empirically find that setting (1,3] as the searching space of $p$ suffices to work well on CIFAR and ImageNet datasets. We will add the details in the appendix. Please refer to Section A.3 in the revision for details.
+A1.2: Similar to [d], We use a subset of Tiny ImageNet as the auxiliary OOD data. We remove those data whose labels coincide with ID cases. We empirically find that our method suffices to work well on CIFAR and ImageNet datasets with (1,3] as the searching space of $p$. We will add the details in the appendix. Please refer to Section A.3 in the revision for details.
 
 [a] Extremely simple activation shaping for out-of-distribution detection. ICLR 2023
 

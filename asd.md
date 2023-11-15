@@ -37,16 +37,25 @@ A1: We are sorry that our presentation makes you confused. Here, what we intend 
 
 Q2: Discuss the role of Deep generative models (DGMs) for flexible density estimation in OOD detection
 
-A2: We thank you for bringing deep generative models into our eyes. We add the discussion on DGMs for flexible density estimation in OOD detection in Section A.8 of the revised version. We agree that using DGMs for latent density estimation is, of course, a valid and natural option. However, this practice requires to train DGMs from scratch, therefore potentially violating the original intention of post-hoc OOD detection, i.e., using the pre-trained model at hand for OOD detection without re-training. Wile it is theoretically possible for zero-shot density estimation with pre-trained diffusion models based on Eq.(1) in [a], the computation is intractable due to the integral. Although the authors in [a] use a simplified ELBO for approximation, there is no theoretical guarantee that the ELBO can align with the ID data density not to mention the time-inefficient inference of diffusion models. We will leave this challenge as our future work.
+A2: We agree that using DGMs for density estimation is, of course, a valid and intuitive option. However, aligning with our response in A1, this practice requires training DGMs from scratch to reconstruct high-dimensional $\mathbf{x}$, therefore bringing more computational overheads. Please kindly note that our paper focuses on the task of Post-hoc OOD detection where only pre-trained models are expected to be used to detect OOD data from streaming data at the interference stage. 
+
+We also explore the possibility of integrating pre-trained Stable Diffusion into zero-shot class-conditioned density estimation based on Eq.(1) in [a]. Unfortunately, the computation is intractable due to the integral. Although authors in [a] use a simplified ELBO for approximation, there is no theoretical guarantee that the ELBO can align with the ID data density not to mention the time-inefficient inference of diffusion models. We will leave this challenge as our future work.
 
 [a] Your Diffusion Model is Secretly a Zero-Shot Classifier. ICCV 2023.
  
 Q3: Tell more about why learning the natural parameter of an Exp. Family is intractable
 
-A3: Thank you for your advice. We add the elaboration on this point in the revised version. In short, Learning the natural parameter of an Exp. Family is intractable because we need to solve the following equtation where an integral in a high-dimensional space is involved.
+A3: Thank you for your advice. given the fact that $\int \hat{p}_{\boldsymbol{\theta}}\left(\mathbf{z}|k \right) {\rm d}\mathbf{z} =1$, we then have:
 
-$$\psi(\boldsymbol{\eta}_k)=\int \exp (\mathbf{z}^\top\boldsymbol{\eta}\_k)-g\_{\psi}(\mathbf{z}){\rm d}\mathbf{z}$$
+$$ \int \exp \left\lbrace \mathbf{z}^\top\boldsymbol{\eta}\_k-\psi(\boldsymbol{\eta}_k)-g\_{\psi}(\mathbf{z})\right\rbrace{\rm d}\mathbf{z}=1 $$
 
+This means that, for any known $\psi(\cdot)$ and $g\_{\psi}(\cdot)$, one can learn the natural parameter $\boldsymbol{\eta}_k$ by solving the following equation:
+
+$$\exp \psi(\boldsymbol{\eta}_k)=\int \exp \left\lbrace \mathbf{z}^\top\boldsymbol{\eta}\_k-g\_{\psi}(\mathbf{z})\right\rbrace{\rm d}\mathbf{z}$$
+
+Since the right side of the equation includes the integral over latent feature space that is high-dimensional, learning the natural parameter of an Exp. Family is said to be intractable.
+
+We add the elaboration above in the revised version.
 
 #### Reviewer LYsh
 We thank Reviewer LYsh for your thorough suggestions. As to the weaknesses and minor issues you pointed out, we took them very seriously, and have updated parts of the paper to improve it. Our response is as follows.
@@ -101,10 +110,14 @@ $$\mathbf{I}\left\lbrace\mathcal{p}\_{\boldsymbol{\theta}}(\mathbf{z})\ge\lambda
 [b] Out-of-distribution detection with deep nearest neighbours. ICML 2022.
 
 [c] Robust estimation of a location parameter. Annals of Mathematical Statistics, 1964.
- 
-Q4: It would be good if the authors could make the notations more distinguishable.
 
-A4: Thank you for your advice. we have improved our use of notations in the revision.
+Q 4: Explain why the algorithm tends to perform well for small p values and derive some for simple cases like the Gaussian one.
+
+Since the searching process of the coefficient $p$ is data-driven, the optimal value of $p$ should vary from dataset to dataset. Therefore, while extensive experiments show that small P values tend to be beneficial to OOD detection on CIFAR and ImageNet, this observation does not necessarily hold for all datasets. It can be seen from Figure 4 (c) and Figure 4 (d) that $p$=2, which corresponds to the Gaussian case, performs noticeably interior to $p$=2.2 in Cifar10 and $p$=2.6 in Cifar100. This indicates the suboptimal of using Gaussian and further emphasizes searching for a better alternative.
+
+Q5: It would be good if the authors could make the notations more distinguishable.
+
+A5: Thank you for your advice. we have improved our use of notations in the revision.
 
 #### Reviewer MqR8
 We thank reviewer MqR8 for your valuable comments. We updated the submission accordingly. Please kindly find the detailed responses below. 

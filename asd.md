@@ -1,17 +1,16 @@
 Dear Area Chairs and Reviewers,
 
-We would like to thank the reviewers again for their constructive and insightful comments. We are encouraged to see that ALL reviewers find our paper novel and significant (). Reviewers also recognize that our work is well-written and informative (XJRS, ZN1X), and the results are substantial, impressive, achieving state-of-the-art (BtG8, XJRS, dSEG, ZN1X). 
-We have uploaded the revised version and responded to all the reviewers in detail. We believe that the quality of the paper is improved and the contributions are solid. In particular, we would like to highlight some key materials we added:
+We would like to thank the reviewers again for their constructive and insightful comments, which help us a lot in improving the submission. We have uploaded the revised version and responded to all the reviewers in detail. We believe that the quality of the paper is improved and the contributions are solid. In particular, we would like to highlight some key materials we added:
 
 >1. Discussion on Deep generative models (DGMs) as our related work (Section A.8)
 >2. Elaboration on why learning the natural parameter of an Exp. Family is intractable (Section A.9)
->3. Theoretical justification of our method (Section A.10)
+>3. Theoretical justification (Section A.10)
 >4. Contribution Summary (Section A.11)
 >5. List of assumptions made in our method (Section A.12)
->6. The searching Strategy of the norm coefficient $p$ (Section A.3)
+>6. The searching strategy of the norm coefficient $p$ (Section A.3)
 >7. Discussion on experiment results of long-tailed OOD detection (Section A.13)
 
-We understand that reviewers are busy during the response period, we would greatly appreciate it if the reviewers can kindly advise if our responses solve their concerns. If there are any other suggestions/questions, we will try our best to provide satisfactory answers. We are looking forward to any further discussion with the reviewers. Thank you for your time.
+We understand that reviewers are busy during the response period, we would greatly appreciate it if the reviewers could kindly advise if our responses solve their concerns. If there are any other suggestions/questions, we will try our best to provide satisfactory answers. We are looking forward to any further discussion with the reviewers. Thank you for your time.
 
 Best regards,
 
@@ -69,9 +68,9 @@ We add the elaboration above in Section A.9 of the revised version.
 #### Reviewer LYsh purple
 We thank Reviewer LYsh for your thorough comments. As to the weaknesses and minor issues you pointed out, we took them very seriously, and have updated parts of the paper to improve it. Our response is as follows.
 
-Q1.1: theoretical justification
+> Q1: theoretical justification
 
-A1.1: Same as KNN [a], we provide a theoretical analysis of our method by analyzing the average OOD detection performance of our algorithm in Section A.11 and as follows. 
+**A1**: Same as KNN [a], we provide a theoretical analysis of our method by analyzing the average OOD detection performance of our algorithm in Section A.11 and as follows. 
 >**Setup.** We consider the OOD detection task as a special binary classification task, where the negative samples (OOD) are only available in the testing stage. We assume the input is from feature embeddings space $\mathcal{Z}$ and the labeling set $\mathcal{G}= \left\lbrace 0(OOD),1(ID) \right\rbrace$. In the inference stage, the testing set $\left\lbrace(\mathbf{z},g)\right\rbrace$ is drawn i.i.d. from $P_{\mathcal{Z} \mathcal{G}}$. Denote the marginal distribution on $\mathcal{Z}$ as $\mathcal{P}$, We adopt the Huber contamination model [b] to model the fact that we may encounter both ID and OOD data in test time:
 $$\mathcal{P}=(1-\epsilon)\mathcal{P}_I+\epsilon \mathcal{P}_O$$
 where $\mathcal{P}_I$ and $\mathcal{P}_o$ are the underlying distributions of feature embeddings for ID and OOD data, respectively, and $\epsilon$ is a constant controlling the fraction of OOD samples in testing. We use $\mathcal{p}_I(\mathbf{z})$ and $\mathcal{p}_o(\mathbf{z})$ to denote the probability density function, where $\mathcal{p}_I(\mathbf{z}) = \mathcal{p}(z|g = 1)$ and $\mathcal{p}_o(\mathbf{z}) = \mathcal{p}(z|g = 0)$. It is natural to approximate $\mathcal{p}_I(\mathbf{z})$ as $\mathcal{p}\_{\boldsymbol{\theta}}(\mathbf{z})$ in Eq.(11). Following KNN, we apprximate OOD distribution by modelling OOD data with an equal chance to appear outside of the high-density region of ID data, i.e., $\mathcal{p}_o(\mathbf{z})=c_o \mathbf{I}\left\lbrace\mathcal{p}\_{\boldsymbol{\theta}}(\mathbf{z})<\beta\right\rbrace$. Given the fact that $\mathcal{p}_o(\mathbf{z})=0$ if $z \in \left\lbrace Enc(\mathbf{x})|\mathbf{x}\in X\_I \right\rbrace$, the empirical esitimator of $\beta$ is given by $\hat\beta = \min\_{(\mathbf{x},\mathbf{y})\in \mathcal{D}\_{\rm in}} \mathcal{p}\_{\boldsymbol{\theta}}(Enc(\mathbf{x}))$ with $Enc(\cdot)$ as the encoder of a pre-train model.
@@ -92,9 +91,9 @@ $$\mathbf{I}\left\lbrace\mathcal{p}\_{\boldsymbol{\theta}}(\mathbf{z})\ge\lambda
 
 [b] Robust estimation of a location parameter. Annals of Mathematical Statistics, 1964.
 
-Q 1.2: Explain why the algorithm tends to perform well for small p values and derive some for simple cases like the Gaussian one.
+> Q 1.2: Explain why the algorithm tends to perform well for small p values and derive some for simple cases like the Gaussian one.
 
-Since the searching process of the coefficient $p$ is data-driven, the optimal value of $p$ should vary from dataset to dataset. Therefore, while extensive experiments show that small P values tend to be beneficial to OOD detection on CIFAR and ImageNet, this observation does not necessarily hold for all datasets. It can be seen from Figure 4 (c) and Figure 4 (d) that $p$=2, which corresponds to the Gaussian case, performs noticeably interior to $p$=2.2 in Cifar10 and $p$=2.6 in Cifar100. This indicates the suboptimal of using Gaussian and further emphasizes searching for a better alternative.
+**A1.2**: Since the searching process of the coefficient $p$ is data-driven, the optimal value of $p$ should vary from dataset to dataset. Therefore, while extensive experiments show that small P values tend to be beneficial to OOD detection on CIFAR and ImageNet, this observation does not necessarily hold for all datasets. It can be seen from Figure 4 (c) and Figure 4 (d) that $p$=2, which corresponds to the Gaussian case, performs noticeably interior to $p$=2.2 in Cifar10 and $p$=2.6 in Cifar100. This indicates the suboptimal of using Gaussian and further emphasizes searching for a better alternative.
 
 > Q2: Maybe it's worth adding a section summarizing the paper's technical novelty.
 
